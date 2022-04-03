@@ -13,9 +13,7 @@ const Employee = () => {
         .then(data=>setDatas(data))
     },[]);
 
-    const addUser=(data)=>{
-        console.log(data)
-    }
+    
         
 
     return (
@@ -23,7 +21,7 @@ const Employee = () => {
             
             <Users datas={datas}></Users>
             
-            <Modal addUser={addUser}></Modal>
+            <Modal ></Modal>
         </div>
     );
 };

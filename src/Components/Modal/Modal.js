@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+
 import { useFormik } from 'formik';
 import './Modal.css'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const validate = values => {
     const errors = {};
@@ -23,6 +25,8 @@ const validate = values => {
   };
 
 const Modal = () => {
+
+    let navigate = useNavigate()
 
     useEffect(()=>{
         let modal = document.querySelector("#myModal");
@@ -61,13 +65,13 @@ const Modal = () => {
         },
         validate,
         onSubmit: values => {
-          console.log(JSON.stringify(values, null, 2));
           axios.post('https://60f2479f6d44f300177885e6.mockapi.io/users', values)
           .then(res=> {
             if(res.statusText ==='Created'){
-                console.log(res)
                 formik.resetForm();
-                document.querySelector("#closeModal").click()}
+                document.querySelector("#closeModal").click()};
+                return navigate(`/${res.data.user_type}`)
+
           })
           .catch(error=> console.log(error))
         },
@@ -105,7 +109,7 @@ const Modal = () => {
             <div className="modal" id="myModal">
             <div className="modal__content">
                 <div className="modal__header">
-                    <button class="modal__header__btn" id="closeModal">X</button>
+                    <button className="modal__header__btn" id="closeModal">X</button>
                 </div>
             <div className="modal__body">
             <form onSubmit={formik.handleSubmit}>
@@ -128,7 +132,7 @@ const Modal = () => {
                         <div className="col-25">
                             <label htmlFor="last_name">Last Name</label>
                         </div>
-                        <div class="col-75">
+                        <div className="col-75">
                             <input id="last_name"
                             name="last_name"
                             type="text"
@@ -139,23 +143,23 @@ const Modal = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div class="col-25">
+                        <div className="col-25">
                             <label htmlFor="User">User type</label>
                         </div>
-                    <div class="col-75">
+                    <div className="col-75">
                         <select id="user_type" name="user_type" value={formik.values.user_type} onChange={handleUserChange}
                         >
                             <option value='admin'>admin</option>
-                            <option value='employe'>employee</option>
+                            <option value='employee'>employee</option>
                         </select>
                     </div>
                     </div>
                     <div className="row">
                         
-                        <div class="col-25">
-                            <label for="subject">division</label>
+                        <div className="col-25">
+                            <label htmlFor="subject">division</label>
                         </div>
-                        <div class="col-75">
+                        <div className="col-75">
                         
                             {(user==='admin')? <input id="division"
                             name="division"
@@ -173,10 +177,10 @@ const Modal = () => {
                     </div>
                     <div className="row">
                         
-                        <div class="col-25">
+                        <div className="col-25">
                             <label htmlFor="District">District</label>
                         </div>
-                        <div class="col-75">
+                        <div className="col-75">
                         
                             {(user==='admin')? <input id="district"
                             name="district"
@@ -194,17 +198,12 @@ const Modal = () => {
                     
                     
                     
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="subject">Subject</label>
-                        </div>
                     
-                    </div>
             </div>
                     
         
-            <div class="modal__footer">
-                    <button class="modal__footer__btn" type='submit'>Save</button>
+            <div className="modal__footer">
+                    <button className="modal__footer__btn" type='submit'>Save</button>
                 </div>
             </form>
                         </div>

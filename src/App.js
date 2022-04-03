@@ -11,6 +11,8 @@ import Employee from './pages/Employee/Employee';
 import Admin from './pages/Admin/Admin';
 import Profile from './pages/Profile/Profile';
 import Edit from './pages/Edit/Edit';
+import Home from './pages/Home/Home';
+import Errorpage from './pages/Errorpage/Errorpage';
 
 const App = () => {
   
@@ -19,17 +21,13 @@ const App = () => {
     <Navbar></Navbar>
       <Routes>
         <Route path="/employee" element={<Employee />} />
+        <Route path="/" element={<Home />} />
         <Route path="/admin" element={<Admin />}/>
         <Route path="/profile/:id" element={<Profile />}/>
         <Route path="/profile/:id/edit" element={<Edit />}>
         <Route
           path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>There's nothing here!</p>
-            </main>
-          }
-        />
+          element={<Errorpage />}/>
         </Route>
     </Routes>
 </BrowserRouter>

@@ -10,10 +10,8 @@ const Profile = () => {
 
     useEffect(()=>{
         setData(loacation.state.data)
-        console.log(loacation.state.data)
     },[]);
     return (
-        <form action="">
         <div className='main'>
             <div className="profile-card">
 
@@ -58,10 +56,10 @@ const Profile = () => {
     </ul>
     <button className="btn-btn"><Link to={`/profile/${data.id}/edit`} state={{data:data}}>Edit</Link></button>
     </div>
-    
+    <Modal ></Modal>
     
         </div>
-        </form>
+        
     );
 };
 

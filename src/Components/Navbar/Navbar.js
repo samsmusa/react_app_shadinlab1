@@ -9,30 +9,30 @@ import { faUser, faUsers, faUserPlus, faAppleAlt } from '@fortawesome/free-solid
 const Navbar = () => {
 
   return (
-    <nav class="navbar">
-    <ul class="navbar-nav">
-      <li class="logo">
-          <span class="link-text logo-text nav-link">Fireship</span>
+    <nav className="navbar">
+    <ul className="navbar-nav">
+      <li className="logo">
+          <span className="link-text logo-text nav-link">Ledger</span>
         <FontAwesomeIcon icon={faAppleAlt} />
       </li>
 
-      <li class="nav-item">
+      <li className="nav-item">
         <Link className='nav-link' to='/employee'>
         <FontAwesomeIcon icon={faUsers} />
-          <span class="link-text">Employee</span>
+          <span className="link-text">Employee</span>
           </Link>
       </li>
 
-      <li class="nav-item">
+      <li className="nav-item">
         <Link className='nav-link' to='/admin'>
         <FontAwesomeIcon icon={faUser} />
-          <span class="link-text">Admins</span>
+          <span className="link-text">Admins</span>
           </Link>
       </li>
-      <li class="nav-item">
+      <li className="nav-item">
       <button className="btn-add" id="openModal">
         <FontAwesomeIcon icon={faUserPlus} />
-          <span class="link-text">Add User</span>
+          <span className="link-text">Add User</span>
           </button>
       </li>
     </ul>

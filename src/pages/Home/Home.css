@@ -1,0 +1,16 @@
+.home-cont{
+    display: flex;
+    align-items: center;
+    /* vertical-align: auto; */
+    margin: auto;
+}
+.home-cont img{
+    width: 60%;
+}
+.home-cont p{
+    font-size: 25px;
+}
+
+.main-home {
+    background-color: white;
+}

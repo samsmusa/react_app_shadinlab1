@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams, Navigate } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
 
@@ -28,6 +28,7 @@ const validate = values => {
 
 
 const Edit = () => {
+    let navigate = useNavigate();
     const loacation = useLocation()
     const [data,setData]=useState({})
 
@@ -69,13 +70,10 @@ const Edit = () => {
         enableReinitialize: true,
         validate,
         onSubmit: values => {
-            console.log(values)
             axios.put(`https://60f2479f6d44f300177885e6.mockapi.io/users/${data.id}`, values)
             .then(res=> {
-                console.log(res.data.id)
                 if(res.statusText ==='OK'){
-                    console.log('ok');
-                    <Navigate to={`/profile/${res.data.id}`} state={{data:res.data}}/>
+                    return navigate(`/${res.data.user_type}`)
                 }
             })
             .catch(error=> console.log(error))
@@ -86,7 +84,6 @@ const Edit = () => {
     const [value, setValue] = useState('null');
 
   const handleChange = (e) => {
-      console.log(value)
     setValue(e.target.value);
   };
   
@@ -99,7 +96,7 @@ const Edit = () => {
     return (
         <form onSubmit={formik.handleSubmit}>
         <div className='main'>
-            <div class="profile-card">
+            <div className="profile-card">
 
         <div className="profile-head" >
 
