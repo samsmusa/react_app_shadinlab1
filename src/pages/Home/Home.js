@@ -7,7 +7,7 @@ const Home = () => {
         <div className='main-home main'>
             <div className='home-cont'>
             <p>You were hired because you met expectations, you will be promoted if you can exceed them.</p>
-            <img src="./dev.png" alt="" srcset="" />
+            <img src="./dev.png"/>
             </div>
             <Modal></Modal>
         </div>

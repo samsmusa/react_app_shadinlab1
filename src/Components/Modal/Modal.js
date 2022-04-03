@@ -24,7 +24,7 @@ const validate = values => {
     return errors;
   };
 
-const Modal = () => {
+const Modal = ({addUser}) => {
 
     let navigate = useNavigate()
 
@@ -60,7 +60,7 @@ const Modal = () => {
           first_name: '',
           last_name: '',
           division:'',
-          user_type:'',
+          user_type:'admin',
           district:''
         },
         validate,
@@ -70,7 +70,8 @@ const Modal = () => {
             if(res.statusText ==='Created'){
                 formik.resetForm();
                 document.querySelector("#closeModal").click()};
-                return navigate(`/${res.data.user_type}`)
+                // return navigate(`/${res.data.user_type}`)
+                return addUser(res.data)
 
           })
           .catch(error=> console.log(error))
@@ -149,7 +150,7 @@ const Modal = () => {
                     <div className="col-75">
                         <select id="user_type" name="user_type" value={formik.values.user_type} onChange={handleUserChange}
                         >
-                            <option value='admin'>admin</option>
+                            <option  value='admin'>admin</option>
                             <option value='employee'>employee</option>
                         </select>
                     </div>
@@ -170,7 +171,7 @@ const Modal = () => {
                         onChange={handleChangeDivision}>
                        
                         {
-                            division.map(e=> <option value={e.division}>{e.division}</option>)
+                            division.map(e=> <option key={e._id} value={e.division}>{e.division}</option>)
                         }
                     </select>}
                     </div>
@@ -190,7 +191,7 @@ const Modal = () => {
                         /> : <select id="district" name="district" onChange={handleChangeDistrict}>
                        
                         {
-                            district.map(e=> <option value={e.district}>{e.district}</option>)
+                            district.map(e=> <option key={e._id} value={e.district}>{e.district}</option>)
                         }
                     </select>}
                     </div>

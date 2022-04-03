@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
 
@@ -30,10 +30,13 @@ const validate = values => {
 const Edit = () => {
     let navigate = useNavigate();
     const loacation = useLocation()
-    const [data,setData]=useState({})
+    const [data,setData]=useState({first_name:'',last_name:'',division:'',district:''})
 
     const [division, setDivision] = useState([])
     const [district, setDistrict] = useState([])
+    useEffect(()=>{
+        setData(loacation.state.data)
+    },[])
 
     useEffect(()=>{
         fetch('https://bdapis.herokuapp.com/api/v1.1/divisions')
@@ -56,10 +59,7 @@ const Edit = () => {
     };
     
 
-    useEffect(()=>{
-        setData(loacation.state.data)
-    },[])
-
+    
     const formik = useFormik({
         initialValues: {
             first_name: data.first_name,
@@ -134,23 +134,23 @@ const Edit = () => {
 
             <p>
             {(data.user_type==='admin')? <input id="division"
-                            className='edit-input'
+                            className='edit-input input-input'
                             name="division"
                             type="text"
                             onChange={formik.handleChange}
                             value={formik.values.division}
-                        /> : <select id="division" name="division"
+                        /> : <select id="division" name="division" 
                         onChange={handleChangeDivision}>
                        
                         {
-                            division.map(e=> <option value={e.division}>{e.division}</option>)
+                            division.map(e=> <option key={e._id} value={e.division}>{e.division}</option>)
                         }
                     </select>}
             
             </p>
             <p>
             {(data.user_type==='admin')? <input id="district"
-                            className='edit-input'
+                            className='edit-input input-input'
                             name="district"
                             type="text"
                             onChange={formik.handleChange}
@@ -158,7 +158,7 @@ const Edit = () => {
                         /> : <select id="district" name="district" onChange={handleChangeDistrict}>
                        
                         {
-                            district.map(e=> <option value={e.district}>{e.district}</option>)
+                            district.map(e=> <option key={e._id} value={e.district}>{e.district}</option>)
                         }
                     </select>}
             </p>
