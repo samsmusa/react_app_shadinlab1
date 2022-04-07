@@ -1,20 +1,21 @@
 import React from 'react';
 
-const Dropdown = ({data,handleChange,change}) => {
-    console.log(data)
-    
+const Dropdown = ({label, data,handleChangeDivision}) => {
     return (
-        <div>
-            <div className="row">
-                    <div class="col-75">
-                        <select id="division" name="division"
-                       {...(change ? {onChange: handleChange} : {})}>
-                            {
-                                data.map(e=> <option value={e[1]}>{e[1]}</option>)
-                            }
-                        </select>
-                    </div>
-                    </div>
+        <div className="row">
+                        
+            <div className="col-25">
+                <label htmlFor="subject">{label}</label>
+            </div>
+            <div className="col-75">
+                <select id={label} name={label}
+                    onChange={handleChangeDivision}>
+                    
+                    {
+                       (label==='division')? data.map(e=> <option key={e._id} value={e.division}>{e.division}</option>) : data.map(e=> <option key={e._id} value={e.district}>{e.district}</option>)
+                    }
+                </select>
+            </div>
         </div>
     );
 };

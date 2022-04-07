@@ -5,6 +5,8 @@ import { useFormik } from 'formik';
 import './Modal.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import InputText from '../InputText/InputText';
+import Dropdown from '../Dropdown/Dropdown';
 
 const validate = values => {
     const errors = {};
@@ -70,7 +72,7 @@ const Modal = ({addUser}) => {
             if(res.statusText ==='Created'){
                 formik.resetForm();
                 document.querySelector("#closeModal").click()};
-                // return navigate(`/${res.data.user_type}`)
+                setUser('admin')
                 return addUser(res.data)
 
           })
@@ -115,34 +117,21 @@ const Modal = ({addUser}) => {
             <div className="modal__body">
             <form onSubmit={formik.handleSubmit}>
                 <div className='form-container'>
-                    <div className="row">
-                    <div className="col-25">
-                        <label htmlFor='first_name'>First Name</label>
-                    </div>
-                    <div className="col-75">
-                        <input 
-                        id="first_name"
-                        name="first_name"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.first_name}/>
-                    </div>
-                    {formik.errors.first_name ? <div className='error-field'>{formik.errors.first_name}</div> : null}
-                    </div>
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="last_name">Last Name</label>
-                        </div>
-                        <div className="col-75">
-                            <input id="last_name"
-                            name="last_name"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.last_name}
-                        />
-                        {formik.errors.last_name ? <div className='error-field'>{formik.errors.last_name}</div> : null}
-                        </div>
-                    </div>
+                    <InputText 
+                        label ='First Name'
+                        name='first_name'
+                        valuefor = {formik.values.first_name}
+                        error = {formik.errors.first_name}
+                        onchange= {formik.handleChange}
+                    ></InputText>
+                    <InputText 
+                        label = 'Last Name'
+                        name='last_name' 
+                        onchange= {formik.handleChange}
+                        valuefor = {formik.values.last_name}
+                        error = {formik.errors.last_name}
+                    ></InputText>
+                    
                     <div className="row">
                         <div className="col-25">
                             <label htmlFor="User">User type</label>
@@ -155,47 +144,9 @@ const Modal = ({addUser}) => {
                         </select>
                     </div>
                     </div>
-                    <div className="row">
-                        
-                        <div className="col-25">
-                            <label htmlFor="subject">division</label>
-                        </div>
-                        <div className="col-75">
-                        
-                            {(user==='admin')? <input id="division"
-                            name="division"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.division}
-                        /> : <select id="division" name="division"
-                        onChange={handleChangeDivision}>
-                       
-                        {
-                            division.map(e=> <option key={e._id} value={e.division}>{e.division}</option>)
-                        }
-                    </select>}
-                    </div>
-                    </div>
-                    <div className="row">
-                        
-                        <div className="col-25">
-                            <label htmlFor="District">District</label>
-                        </div>
-                        <div className="col-75">
-                        
-                            {(user==='admin')? <input id="district"
-                            name="district"
-                            type="text"
-                            onChange={formik.handleChange}
-                            value={formik.values.district}
-                        /> : <select id="district" name="district" onChange={handleChangeDistrict}>
-                       
-                        {
-                            district.map(e=> <option key={e._id} value={e.district}>{e.district}</option>)
-                        }
-                    </select>}
-                    </div>
-                    </div>
+                    {(user==='admin') || <Dropdown label='division' data={division} handleChangeDivision={handleChangeDivision}></Dropdown>}
+                    {(user==='admin') || <Dropdown label='district' data={district} handleChangeDivision={handleChangeDistrict}></Dropdown>}
+                    
                     
                     
                     

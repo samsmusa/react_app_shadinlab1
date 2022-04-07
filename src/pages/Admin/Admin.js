@@ -58,7 +58,7 @@ const Admin = () => {
                 activeClassName = {'pagination__link--active'}
                 disabledClassName={"pagination__link--disabled"}
             ></ReactPaginate>
-            <Modal addUser={addUser} ></Modal>
+            {/* <Modal addUser={addUser} ></Modal> */}
         </div>
     );
 };
